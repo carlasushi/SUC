@@ -10,10 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_18_085453) do
+ActiveRecord::Schema.define(version: 2019_11_18_133306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "chores", force: :cascade do |t|
+    t.string "name"
+    t.date "due_date"
+    t.date "done_date"
+    t.boolean "done"
+    t.text "description"
+    t.string "image"
+    t.bigint "room_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_chores_on_room_id"
+    t.index ["user_id"], name: "index_chores_on_user_id"
+  end
+
+  create_table "homes", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_homes_on_user_id"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "role"
+    t.bigint "home_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["home_id"], name: "index_roles_on_home_id"
+    t.index ["user_id"], name: "index_roles_on_user_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
+    t.bigint "home_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["home_id"], name: "index_rooms_on_home_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,4 +68,10 @@ ActiveRecord::Schema.define(version: 2019_11_18_085453) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "chores", "rooms"
+  add_foreign_key "chores", "users"
+  add_foreign_key "homes", "users"
+  add_foreign_key "roles", "homes"
+  add_foreign_key "roles", "users"
+  add_foreign_key "rooms", "homes"
 end
