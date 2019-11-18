@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <div class="col-sm-4 offset-col-4">
+      <%= simple_form_for(@home) do |f| %>
+        <% if @home.errors.any? %>
+          <div class="errors-container">
+            <ul>
+              <% @home.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <h3>add a new home</h3>
+        <%= f.input :name %>
+        <%= f.submit "add a home", class: "btn btn-success" %>
+      <% end %>
+      <%= link_to "back to homes", homes_path, class: "btn btn-warning" %>
+    </div>
+  </div>
+</div>

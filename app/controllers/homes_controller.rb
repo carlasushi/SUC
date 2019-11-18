@@ -1,5 +1,5 @@
 class HomesController < ApplicationController
-
+before_action :set_home, only: [:show, :edit, :update, :destroy]
   def index
     @homes = Home.all
   end
@@ -13,11 +13,23 @@ class HomesController < ApplicationController
   end
 
   def create
+    @home = Home.new(home_params)
+    @home.user = current_user
+    if @home.save
+      redirect_to dashboard_path
+    else
+      render :new
+    end
+  end
 
+  def edit
+    # @home = Home.find(params[:id])
   end
 
   def update
-
+    # @home = Home.find(params[:id])
+    # @home.update(home_params)
+    # redirect_to home_path(@home)
   end
 
   def destroy
@@ -26,4 +38,12 @@ class HomesController < ApplicationController
 
 private
 
+  def set_home
+    # @home.destroy
+    # redirect_to home_path
+  end
+
+  def home_params
+      params.require(:home).permit(:name)
+  end
 end

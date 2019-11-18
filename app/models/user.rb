@@ -5,8 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   # Association
-  has_many :roles
-  has_many :homes
+  has_one :role
+  has_one :home
   has_many :chores
 
+  def current_home
+    home || role&.home
+  end
 end
