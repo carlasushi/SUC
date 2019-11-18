@@ -1,4 +1,4 @@
 class Role < ApplicationRecord
   belongs_to :home
-  belongs_to :user, dependent: :destroy
+  belongs_to :user
 end
