@@ -1,2 +1,24 @@
-<h1>home dashboard</h1>
-<%= @my_home.name %>
+
+  <div class="container">
+    <h1>home dashboard</h1>
+    <h4>your home is <%= @my_home.name %></h4>
+    <div class="row mx-0 mt-5 aw-grid">
+      <div class="col-4">
+        <nav class="nav flex-column">
+          <!-- change all these ones for link paths -->
+          <a class="nav-link active" href="#">create new room</a>
+          <a class="nav-link" href="#">create new chore</a>
+          <a class="nav-link" href="#">edit room</a>
+          <a class="nav-link" href="#">edit chore</a>
+          <a class="nav-link" href="#">add housemate </a>
+        </nav>
+    </div>
+    <div class="col-8">
+      <h5>add grid here </h5>
+      <h5>diplay current chores</h5>
+      <h5>diplay overdue chores</h5>
+      <h5>diplay past chores</h5>
+      <h5>add avatars here </h5>
+    </div>
+  </div>
+</div>
