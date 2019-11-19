@@ -1,11 +1,9 @@
 class HomesController < ApplicationController
 before_action :set_home, only: [:show, :edit, :update, :destroy]
-  def index
-    @homes = Home.all
-  end
 
-  def show
-
+  def my_dashboard
+    @my_home = current_user.home
+    @rooms = @my_home.rooms
   end
 
   def new
@@ -44,6 +42,7 @@ private
   end
 
   def home_params
-      params.require(:home).permit(:name)
+    params.require(:home).permit(:name)
   end
+# add params for rooms?
 end
