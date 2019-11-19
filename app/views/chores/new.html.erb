@@ -1,19 +1,23 @@
 <div class="container">
   <div class="row d-flex justify-content-center">
     <div class="col-sm-4 offset-col-4">
-      <%= simple_form_for(@home) do |f| %>
-        <% if @home.errors.any? %>
+      <%= simple_form_for [@room, @chore] do |f| %>
+        <% if @chore.errors.any? %>
           <div class="errors-container">
             <ul>
-              <% @home.errors.full_messages.each do |message| %>
+              <% @chore.errors.full_messages.each do |message| %>
                 <li><%= message %></li>
               <% end %>
             </ul>
           </div>
         <% end %>
-        <h3>add a new home</h3>
+        <h3>add a new chore</h3>
         <%= f.input :name %>
-        <%= f.submit "add a home", class: "btn btn-success" %>
+        <%= f.input :due_date %>
+        <%= f.input :description %>
+        <%= f.input :image %>
+        <%= f.input :user, collection: @home.users %>
+        <%= f.submit "add a chore", class: "btn btn-success" %>
       <% end %>
       <%= link_to "back to dashboard", dashboard_path, class: "btn btn-warning" %>
     </div>

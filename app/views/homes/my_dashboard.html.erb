@@ -1,0 +1,21 @@
+
+  <div class="container">
+    <h1>home dashboard</h1>
+    <h4>your home is <%= @my_home.name %></h4>
+    <div class="row mx-0 mt-5 aw-grid">
+      <div class="col-4">
+        <nav class="nav flex-column">
+          <%= link_to "create new room", new_home_room_path(@my_home), class: "btn btn-primary" %>
+          <%= link_to "create new chore", new_room_chore_path(@my_home), class: "btn btn-warning" %>
+          <a class="nav-link" href="#">edit room</a>
+          <a class="nav-link" href="#">edit chore</a>
+          <a class="nav-link" href="#">add housemate </a>
+        </nav>
+    </div>
+    <div class="col-8">
+      <% @rooms.each do |room| %>
+      - <%= room.name%>
+      <% end %>
+    </div>
+  </div>
+</div>
